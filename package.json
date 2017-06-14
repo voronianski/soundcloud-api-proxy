@@ -1,0 +1,39 @@
+{
+  "name": "soundcloud-api-proxy",
+  "version": "1.0.0",
+  "description": "Just a simple proxy server for not letting to abuse my SoundCloud client secrets",
+  "main": "./index.js",
+  "scripts": {
+    "start": "node .",
+    "watch": "nodemon . -w ./index.js",
+    "test": "echo \"Error: no test specified\" && exit 0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/voronianski/soundcloud-api-proxy.git"
+  },
+  "keywords": [
+    "soundcloud",
+    "api",
+    "proxy"
+  ],
+  "author": "Dmitri Voronianski <dmitri.voronianski@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/voronianski/soundcloud-api-proxy/issues"
+  },
+  "engines": {
+    "node": ">=6.0.0"
+  },
+  "homepage": "https://github.com/voronianski/soundcloud-api-proxy#readme",
+  "dependencies": {
+    "cors": "^2.8.3",
+    "express": "^4.15.3",
+    "morgan": "^1.8.2",
+    "request": "^2.81.0"
+  },
+  "devDependencies": {
+    "eslint": "^4.0.0",
+    "nodemon": "^1.11.0"
+  }
+}
