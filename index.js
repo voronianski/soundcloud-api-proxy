@@ -9,7 +9,7 @@ const API_URL = process.env.API_URL || 'https://api.soundcloud.com';
 const WHITELIST = process.env.WHITELIST || '';
 const ALLOWED_ORIGINS = WHITELIST
   ? WHITELIST.split(',')
-  : ['localhost', '127.0.0.1', void 0];
+  : ['localhost', void 0];
 
 const app = express();
 
