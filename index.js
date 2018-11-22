@@ -29,10 +29,8 @@ app.use(handleMisc);
 function corsDelegate(req, done) {
   const corsOptions = { origin: false };
 
-  if (WHITELIST.includes(req.header('Origin')) !== -1) {
+  if (WHITELIST.includes(req.header('Origin'))) {
     corsOptions.origin = true;
-  } else {
-    corsOptions.origin = false;
   }
 
   done(null, corsOptions);
