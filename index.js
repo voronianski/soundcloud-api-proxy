@@ -6,7 +6,7 @@ const request = require('request');
 const PORT = process.env.PORT || 1984;
 const CLIENT_ID = process.env.CLIENT_ID;
 const API_URL = process.env.API_URL || 'https://api.soundcloud.com';
-const WHITELIST = (process.env.WHITELIST || []).split(',') || [
+const WHITELIST = (process.env.WHITELIST || '').split(',') || [
   'localhost',
   '127.0.0.1'
 ];
@@ -39,9 +39,9 @@ function corsDelegate(req, done) {
 }
 
 function handleResolve(req, res) {
-  const resolver = `${API_URL}/resolve.json?url=${
+  const resolver = `${API_URL}/resolve.json?client_id=${CLIENT_ID}&url=${
     req.query.url
-  }&client_id=${CLIENT_ID}`;
+  }`;
 
   return request(resolver).pipe(res);
 }
