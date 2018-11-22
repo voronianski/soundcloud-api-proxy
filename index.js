@@ -6,15 +6,16 @@ const request = require('request');
 const PORT = process.env.PORT || 1984;
 const CLIENT_ID = process.env.CLIENT_ID;
 const API_URL = process.env.API_URL || 'https://api.soundcloud.com';
-const WHITELIST = (process.env.WHITELIST || '').split(',') || [
-  'localhost',
-  '127.0.0.1'
-];
+const WHITELIST = process.env.WHITELIST || '';
+const ALLOWED_ORIGINS = WHITELIST
+  ? WHITELIST.split(',')
+  : ['localhost', '127.0.0.1', void 0];
 
 const app = express();
 
 app.use(logger('dev'));
-app.use(cors(corsDelegate));
+app.use(cors());
+app.use(checkOrigin);
 
 // short variants
 app.get('/resolve', handleResolve);
@@ -26,14 +27,12 @@ app.get('/tracks/:trackId/stream', handleStream);
 
 app.use(handleMisc);
 
-function corsDelegate(req, done) {
-  const corsOptions = { origin: false };
-
-  if (WHITELIST.includes(req.header('Origin'))) {
-    corsOptions.origin = true;
+function checkOrigin(req, res, next) {
+  if (ALLOWED_ORIGINS.includes(req.header('Origin'))) {
+    return next();
   }
 
-  done(null, corsOptions);
+  return res.sendStatus(401);
 }
 
 function handleResolve(req, res) {
