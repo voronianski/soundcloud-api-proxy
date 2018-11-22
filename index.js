@@ -15,8 +15,15 @@ const app = express();
 
 app.use(logger('dev'));
 app.use(cors(corsDelegate));
+
+// short variants
 app.get('/resolve', handleResolve);
 app.get('/stream/:trackId', handleStream);
+
+// legacy soundcloud variants
+app.get('/resolve.json', handleResolve);
+app.get('/tracks/:trackId/stream', handleStream);
+
 app.use(handleMisc);
 
 function corsDelegate(req, done) {
