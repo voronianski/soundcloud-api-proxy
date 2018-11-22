@@ -7,9 +7,7 @@ const PORT = process.env.PORT || 1984;
 const CLIENT_ID = process.env.CLIENT_ID;
 const API_URL = process.env.API_URL || 'https://api.soundcloud.com';
 const WHITELIST = process.env.WHITELIST || '';
-const ALLOWED_ORIGINS = WHITELIST
-  ? WHITELIST.split(',')
-  : ['localhost', void 0];
+const ALLOWED_ORIGINS = WHITELIST ? WHITELIST.split(',') : ['localhost'];
 
 const app = express();
 
@@ -28,7 +26,7 @@ app.get('/tracks/:trackId/stream', handleStream);
 app.use(handleMisc);
 
 function checkOrigin(req, res, next) {
-  if (ALLOWED_ORIGINS.includes(req.header('Origin'))) {
+  if (ALLOWED_ORIGINS.includes(String(req.header('Origin')))) {
     return next();
   }
 
